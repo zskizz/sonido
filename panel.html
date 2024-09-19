@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Sonidos</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .my-form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .my-form div {
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 5px;
+            border-radius: 100%;
+            box-shadow: 0px 0px 5px 7px #1475ec73;
+            background-color: #1474ec;
+            color: white;
+            font-size: 17px;
+            border: none;
+            display: flex;
+            align-items: center;
+        }
+
+        button:active {
+            border-radius: 100%;
+            box-shadow: inset 0px 0px 10px 0px rgb(240, 237, 237);
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Panel de Sonidos</h1>
+
+    <form class="my-form">
+        <div>
+            <label><input type="checkbox" id="sound1" value="mono.mp3"> Sonido Mono</label>
+            <button type="button" onclick="playSound('mono.mp3')">Escuchar</button>
+        </div>
+
+        <div>
+            <label><input type="checkbox" id="sound2" value="moai.mp3"> Sonido Moai</label>
+            <button type="button" onclick="playSound('moai.mp3')">Escuchar</button>
+        </div>
+
+        <div>
+            <label><input type="checkbox" id="sound3" value="metal.mp3"> Sonido Metal</label>
+            <button type="button" onclick="playSound('metal.mp3')">Escuchar</button>
+        </div>
+
+        <div>
+            <label for="interval">Intervalo aleatorio:</label>
+            <select id="interval">
+                <option value="30">30 segundos</option>
+                <option value="20">20 segundos</option>
+                <option value="10">10 segundos</option>
+                <option value="5">5 segundos</option>
+                <option value="1">1 minuto</option>
+            </select>
+        </div>
+        <button type="button" onclick="playSelectedSounds()">Reproducir Aleatorio</button>
+    </form>
+
+    <script>
+        // Función para reproducir un sonido individual
+        function playSound(sound) {
+            var audio = new Audio(sound);
+            audio.play();
+        }
+
+        // Función para reproducir sonidos seleccionados en intervalos aleatorios
+        function playSelectedSounds() {
+            const sounds = [];
+            if (document.getElementById('sound1').checked) sounds.push('mono.mp3');
+            if (document.getElementById('sound2').checked) sounds.push('moai.mp3');
+            if (document.getElementById('sound3').checked) sounds.push('metal.mp3');
+
+            if (sounds.length === 0) {
+                alert('Selecciona al menos un sonido.');
+                return;
+            }
+
+            const interval = parseInt(document.getElementById('interval').value, 10) * 1000;
+
+            setInterval(() => {
+                const randomSound = sounds[Math.floor(Math.random() * sounds.length)];
+                playSound(randomSound);
+            }, interval);
+        }
+    </script>
+
+</body>
+</html>
