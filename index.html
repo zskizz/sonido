@@ -46,19 +46,26 @@
             font-size: 16px;
         }
 
-        .interval-section input {
-            width: 60px;
+        .interval-section select {
             padding: 5px;
             margin-left: 10px;
             font-size: 16px;
-            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="interval-section">
         <label for="interval">Elige el intervalo de segundos:</label>
-        <input type="number" id="interval" name="interval" min="1" max="60" value="10">
+        <select id="interval" name="interval">
+            <option value="10">10 segundos</option>
+            <option value="20">20 segundos</option>
+            <option value="30">30 segundos</option>
+            <option value="60">60 segundos</option>
+            <option value="120">1 minuto</option>
+            <option value="240">5 minutos</option>
+            <option value="420">7 minutos</option>
+            <option value="1">👿</option>
+        </select>
     </div>
 
     <button class="youtube-button" onclick="window.location.href='panel.html'">
@@ -74,9 +81,9 @@
     </button>
 
     <script>
-        // Puedes capturar el valor del intervalo seleccionado
-        const input = document.getElementById('interval');
-        input.addEventListener('change', (event) => {
+        // Captura el valor seleccionado en el dropdown
+        const select = document.getElementById('interval');
+        select.addEventListener('change', (event) => {
             const intervalValue = event.target.value;
             console.log(`Intervalo seleccionado: ${intervalValue} segundos`);
             // Aquí puedes usar el valor del intervalo para algo más
